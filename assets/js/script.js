@@ -23,36 +23,54 @@ var questionsDiv = document.querySelector("#questions");
 function startQuiz() {
   console.log("CONSOLELOGA1");
   startEl.setAttribute("class", "hide");
-  questionsDiv.removeAttribute("class");
+  questionsDiv.classList.remove("hide");
   nextQuestion();
+  showOptions();
 }
 //
 startButton.addEventListener("click", startQuiz);
+var counter = 90;
+//TODO (MAKE QUERY SELECTOR) clockTimeLeftEl.innerText = `time: ${counter}`;
 
 //!!function that is going to take care of handeling the next question
 function nextQuestion() {
   console.log("CONSOLELOGA2");
-  var question = questions[currentQuestion].q;
+  var question = questionsList[currentQuestion].q;
   questionEl.textContent = question;
 }
 //!!function for time left on quiz
-clockTimeLeftEl.innerText = `time: ${counter}`
 function timeLeftCountdown() {
-    var counter = 90
-    var clockTimeLeftEl = document.createElement.("div")
-    clockTimeLeftEl.innerText = `time: ${counter}`
-    var LeftCountdown  = setInterval(function(){
-            counter--;
-            if(counter === 0) {
-            clearInterval()
-            }
-        }, 1000);   
-    
+  document.createElement("div").innerText = `time: ${counter}`;
+  //// clockTimeLeftEl.innerText = `time: ${counter}`
+  var LeftCountdown = setInterval(function () {
+    counter--;
+    if (counter === 0) {
+      clearInterval(LeftCountdown);
+    }
+  }, 1000);
 }
+
 //!!function for to take away time if question is answered wrong
+
+function showOptions() {
+  console.log("CONSOLELOGA3");
+  var answers = answerList[currentQuestion];
+  console.log(answers);
+  for (var i = 0; i < questionsList.length; i++) {
+    // document.querySelector(`#answer${i}`).textContent = answers[i];
+    var answer_buttons = document.createElement("button");
+    console.log(answer_buttons);
+    answer_buttons.textContent = answers[i];
+    answer_buttons.onclick = document //function to be made later it is going to check if somthing is correct if it is () => checkQuestion(answers[i])
+      .querySelector("#answer_buttons")
+      .appendChild(answer_buttons);
+    console.log("CONSOLELOGA4");
+  }
+}
+var checkQuestion = function () {};
+function wrongAnswer() {}
+
 // REFERENCEvar askQuestionEl = document.createElement("li");
-
-
 //TODO inside of next quesion we want to give each answer a button and put it on the screen.
 
 //TODO each button should have  click listener that handles answering a question
