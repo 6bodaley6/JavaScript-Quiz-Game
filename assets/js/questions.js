@@ -1,4 +1,39 @@
 //!! in questions.js make questions multiple choice and keep track of right answer var questions =
+
+let questions = [
+  {
+    text: "Which of the following uses true or false logic?",
+    correctAnswer: "booleans",
+    options: ["Strings", "booleans", "alerts", "numbers"],
+  },
+  {
+    text: "The Condition if/else is enclosed within.",
+    correctAnswer: "curly brackets",
+    options: ["quotes", "curly brackets", "parethensis", "square brackets"],
+  },
+  {
+    text: "Arrays in JavaScript can be used to store",
+    correctAnswer: "All of the above",
+    options: [
+      "numbers and strings",
+      "other arrays",
+      "booleans",
+      "All of the above",
+    ],
+  },
+  {
+    text: "String values are supposed to be stored",
+    correctAnswer: "quotes",
+    options: ["commas", "curly brackets", "quotes", "parethensis"],
+  },
+  {
+    text:
+      "A very useful tool used during devolopment is used for printing content on to the  debugger is",
+    correctAnswer: "console.log",
+    options: ["JavaScript", "terminal/bash", "for loops", "console.log"],
+  },
+];
+
 // let questionsList = [
 //   { q: "Which of the following uses true or false logic.", a: "booleans" },
 //   { q: "The Condition if/else is enclosed within.", a: "curly brackets" },
@@ -19,18 +54,7 @@
 //   ["commas", "curly brackets", "quotes", "parethensis"],
 //   ["JavaScript", "terminal/bash", "for loops", "console.log"],
 // ];
-let questions = [
-  {
-    text: "Which of the following uses true or false logic?",
-    correctAnswer: "booleans",
-    options: ["Strings", "booleans", "alerts", "numbers"],
-  },
-  {
-    text: "The Condition if/else is enclosed within.",
-    correctAnswer: "curly brackets",
-    options: ["quotes", "curly brackets", "parethensis", "square brackets"],
-  },
-];
+
 //* for (var index = 0; index < questions.length; index++) {
 
 // I to have some logic added that will have event listeners that , And in that event listener that will happen when the user clicks answer that is where 1., 2., 3.,
