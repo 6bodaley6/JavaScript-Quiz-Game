@@ -13,8 +13,6 @@ var answerButtons;
 var resultEL = document.getElementById("end");
 var restartButton = document.querySelector("#restart-button");
 
-//
-//!! function for start buttone
 function startQuiz() {
   startEl.setAttribute("class", "hide");
   questionsDiv.classList.remove("hide");
@@ -49,7 +47,6 @@ function restartQuiz() {
   loadQuestion();
   timeLeftCountdown();
 }
-//!!function that is going to take care of handeling the next question
 function loadQuestion() {
   var question = questions[currentQuestion];
   questionEl.textContent = question.text;
@@ -59,8 +56,6 @@ function loadQuestion() {
   question.options.forEach((answer) => {
     answerButtons.innerHTML += `<button onclick="javascript:checkQuestion('${answer}')" class="buttonClass" id="${answer}">${answer}</button>`;
   });
-  //  var jQueoryTest = $("test");
-  // var ES6String = `${}
 }
 function checkQuestion(choice) {
   console.log("user selected choice: " + choice);
@@ -75,8 +70,6 @@ function checkQuestion(choice) {
     removeTimeIfWrong();
   }
 }
-//!!function for timer which shows how much time left on quiz
-
 function timeLeftCountdown() {
   updateTimer();
   var LeftCountdown = setInterval(function () {
@@ -117,9 +110,20 @@ var removeTimeIfWrong = function () {
 function updateTimer() {
   timerDiv.innerText = `time: ${counter}`;
 }
+function saveHighScore() {
+  var initials = document.getElementById("initials-input").value;
+  var highScores = [];
+  var currentUserHighScore = { initials, highScore: quizScore };
+  highScores.push(currentUserHighScore);
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+  console.log(localStorage);
+}
+document
+  .getElementById("save-high-score")
 
-//function for if the answer is wrong take away time
+  .addEventListener("click", saveHighScore);
 
-// document.createElement("button").innerText = `choice: ${choice}`;
 //TODO the div with the questions is loads on page loads and it is hidden until the user click the start button
 //TODO -so it looks like the start button is starting the questions but it is not it is just unhiding the questions
+//  var jQueoryTest = $("test");
+// var ES6String = `${}
