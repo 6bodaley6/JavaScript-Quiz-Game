@@ -3,7 +3,7 @@ var quizScore = 0;
 var currentQuestion = 0;
 var counter = 90;
 //
-//!!queryselectors
+//!!queryselectorsand getElement
 var timerDiv = document.querySelector("#timer");
 var startButton = document.querySelector("#start-button");
 var questionEl = document.querySelector("#question");
@@ -12,6 +12,7 @@ var questionsDiv = document.querySelector("#questions");
 var answerButtons;
 var resultEL = document.getElementById("end");
 var restartButton = document.querySelector("#restart-button");
+var showHighScoresList = document.getElementById("show-high-scores");
 
 function startQuiz() {
   startEl.setAttribute("class", "hide");
@@ -44,6 +45,9 @@ function restartQuiz() {
   startEl.setAttribute("class", "hide");
   questionsDiv.classList.remove("hide");
   resultEL.setAttribute("class", "hide");
+  showHighScoresList.classList.add("hide");
+  var scoreEl = document.getElementById("score-list");
+  scoreEl.innerHTML = "";
   loadQuestion();
   timeLeftCountdown();
 }
@@ -62,13 +66,12 @@ function checkQuestion(choice) {
   let question = questions[currentQuestion];
   if (question.correctAnswer === choice) {
     addTimeIfCorrect();
-
-    currentQuestion++;
-    navigateQuiz();
   } else {
     console.log(`incorrect answer ${choice}`);
     removeTimeIfWrong();
   }
+  currentQuestion++;
+  navigateQuiz();
 }
 function timeLeftCountdown() {
   updateTimer();
@@ -97,7 +100,7 @@ function showOptions() {
   }
 }
 var addTimeIfCorrect = function () {
-  counter = counter + 5;
+  // // counter = counter + 5;
   updateTimer();
 };
 var removeTimeIfWrong = function () {
@@ -112,11 +115,26 @@ function updateTimer() {
 }
 function saveHighScore() {
   var initials = document.getElementById("initials-input").value;
-  var highScores = [];
   var currentUserHighScore = { initials, highScore: quizScore };
+  var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
   highScores.push(currentUserHighScore);
+  highScores.sort(function (a, b) {
+    return b.highScore - a.highScore;
+  });
   localStorage.setItem("highScores", JSON.stringify(highScores));
-  console.log(localStorage);
+  console.log(highScores);
+  displayHighScore();
+}
+function displayHighScore() {
+  var listOfHighScores = JSON.parse(localStorage.getItem("highScores"));
+  resultEL.classList.add("hide");
+  showHighScoresList.classList.remove("hide");
+  var scoreEl = document.getElementById("score-list");
+  for (var i = 0; i < listOfHighScores.length; i++) {
+    var listEl = document.createElement("li");
+    listEl.textContent = `${listOfHighScores[i].initials}: ${listOfHighScores[i].highScore}`;
+    scoreEl.appendChild(listEl);
+  }
 }
 document
   .getElementById("save-high-score")
